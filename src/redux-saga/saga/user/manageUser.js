@@ -1,6 +1,6 @@
 import { call, put } from "redux-saga/effects";
-import { get_user, post_user } from "../../user/api/api";
-import { GET_USER_ERROR, GET_USER_SUCCESS, POST_USER_ERROR, POST_USER_SUCCESS } from "../../user/action/action";
+import { delete_user, get_user, post_user } from "../../user/api/api";
+import { DELETE_USER_ERROR, DELETE_USER_SUCCESS, GET_USER_ERROR, GET_USER_SUCCESS, POST_USER_ERROR, POST_USER_SUCCESS } from "../../user/action/action";
 
 function* handle_get_user(action) {
   // console.log(action, "action from manage");
@@ -35,4 +35,22 @@ function* handle_post_user(action) {
 
 }
 
-export { handle_get_user, handle_post_user };
+
+function* handle_delete_user(action) {
+  console.log(action, "action from manage");
+  try {
+
+    let { data, status } = yield call(delete_user, action)
+
+    if (status == 200) {
+      yield put({ type: DELETE_USER_SUCCESS, data })
+    } else {
+      yield put({ type: DELETE_USER_ERROR, data })
+    }
+
+  } catch (err) {
+    yield put({ type: DELETE_USER_ERROR, err })
+  }
+}
+
+export { handle_get_user, handle_post_user, handle_delete_user };

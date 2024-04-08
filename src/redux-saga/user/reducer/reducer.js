@@ -1,4 +1,6 @@
 import {
+  DELETE_USER_PENDING,
+  DELETE_USER_SUCCESS,
   GET_USER_ERROR,
   GET_USER_PENDING,
   GET_USER_SUCCESS,
@@ -59,6 +61,28 @@ let userReducer = (state = initialState, action) => {
       return {
         isError: action.data,
         ...state
+      }
+    }
+
+    //delete user
+    case DELETE_USER_PENDING: {
+      return {
+        ...state,
+        isLoading: true
+      }
+    }
+
+    case DELETE_USER_SUCCESS: {
+      return {
+        isLoading: false,
+        user: state.user.filter((val) => val.id !== action.data.id)
+      }
+    }
+
+    case DELETE_USER_SUCCESS: {
+      return {
+        isLoading: false,
+        isError: action.data
       }
     }
 

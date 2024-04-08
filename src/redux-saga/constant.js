@@ -5,3 +5,6 @@ export let GET_USER = "/users";
 
 //Post user
 export let POST_USER = "/users";
+
+//delete user
+export let DELETE_USER = "/users/"; //+id

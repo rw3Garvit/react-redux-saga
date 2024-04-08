@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { POST_USER_PENDING } from "../redux-saga/user/action/action";
+import { DELETE_USER_PENDING, POST_USER_PENDING } from "../redux-saga/user/action/action";
 
 const Data = () => {
 
@@ -12,6 +12,7 @@ const Data = () => {
 
   let dispatch = useDispatch()
 
+  //add user
   let addUser = () => {
 
     let data = {
@@ -25,6 +26,14 @@ const Data = () => {
 
   }
 
+  //delete user
+  let handleDelete = (id) => {
+
+    console.log(id);
+
+    dispatch({ type: DELETE_USER_PENDING, payload: id })
+  }
+
   return (
     <>
 
@@ -33,8 +42,12 @@ const Data = () => {
       <button onClick={addUser}>Save</button>
 
       <div>
-        {user.user.map((val, index) => (
-          <h1>{val.email}</h1>
+        {user.user?.map((val, index) => (
+          <>
+            <p>{val.id}</p>
+            <h1>{val.email}</h1>
+            <button onClick={() => handleDelete(val.id)}>delete</button>
+          </>
         ))}
       </div>
 

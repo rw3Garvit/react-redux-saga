@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_USER, POST_USER, base_url } from "../../constant";
+import { DELETE_USER, GET_USER, POST_USER, base_url } from "../../constant";
 
 let get_user = (action) => {
   // console.log(action, "action from api");
@@ -13,9 +13,9 @@ let get_user = (action) => {
 
 
 let post_user = (action) => {
-  console.log(action, "action api ");
+  // console.log(action, "action api ");
   return axios.post(base_url + POST_USER, action.payload).then((res) => {
-    console.log(res, "res from api");
+    // console.log(res, "res from api");
     let data = res.data
     let status = res.status
     return { data, status }
@@ -23,4 +23,14 @@ let post_user = (action) => {
 
 }
 
-export { get_user, post_user };
+let delete_user = (action) => {
+  console.log(action, "action from api");
+  return axios.delete(base_url + DELETE_USER + action.payload).then((res) => {
+    console.log(res, "this is from delete api");
+    let data = res.data
+    let status = res.status
+    return { data, status }
+  })
+}
+
+export { get_user, post_user, delete_user };
