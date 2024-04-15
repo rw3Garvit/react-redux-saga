@@ -8,3 +8,6 @@ export let POST_USER = "/users";
 
 //delete user
 export let DELETE_USER = "/users/"; //+id
+
+//update user
+export let PUT_USER = "/users/"; //+id
